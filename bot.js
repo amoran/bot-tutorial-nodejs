@@ -23,9 +23,6 @@ function respond() {
 
 function test() {
   this.res.writeHead(200);
-
-  var name = botRegex.exec(request.text)[1];
-
   this.res.end(insulter.insult('You'));
 }
 
