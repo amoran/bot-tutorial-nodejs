@@ -1,15 +1,18 @@
 var HTTPS = require('https');
-var cool = require('cool-ascii-faces');
+var insulter = require('./insulter.js');
 
 var botID = process.env.BOT_ID;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /^\/cool guy$/;
+      botRegex = /^\/insult (.*)$/;
 
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage();
+
+    var name = botRegex.exec(request.text)[1];
+    postMessage(name);
+
     this.res.end();
   } else {
     console.log("don't care");
@@ -18,10 +21,18 @@ function respond() {
   }
 }
 
-function postMessage() {
+function test() {
+  this.res.writeHead(200);
+
+  var name = botRegex.exec(request.text)[1];
+
+  this.res.end(insulter.insult('You'));
+}
+
+function postMessage(name) {
   var botResponse, options, body, botReq;
 
-  botResponse = cool();
+  botResponse = insulter.insult(name);
 
   options = {
     hostname: 'api.groupme.com',
