@@ -66,3 +66,4 @@ function postMessage(name) {
 
 
 exports.respond = respond;
+exports.test = test;
